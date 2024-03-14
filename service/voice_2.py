@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_webrtc import webrtc_streamer, WebRtcMode
 from pydub import AudioSegment
 import requests
-from flask import Flask, request, jsonify
 from transformers import GPT2LMHeadModel, AutoTokenizer
 import torch
 
@@ -12,9 +11,6 @@ st.markdown(
     "<p style='color:gray; font-size:20px; font-family:Arial;'>어서오세요 고객님! 음성 인식 챗봇 '딥봇'입니다.</p>",
     unsafe_allow_html=True
 )
-
-# Flask app initialization
-app = Flask(__name__)
 
 # 모델 및 토크나이저 초기화
 model_dir = './service/model'
@@ -30,13 +26,6 @@ def return_answer_by_chatbot(user_text):
     sentence = tokenizer.decode(output[0].tolist())
     chatbot_response = sentence.split('<sys> ')[1].replace('</s>', '')
     return chatbot_response
-
-# Flask route: 챗봇 예측 요청 처리
-@app.route("/predict", methods=["POST"])
-def predict():
-    user_text = request.json['user_text']
-    chatbot_response = return_answer_by_chatbot(user_text)
-    return jsonify({'chatbot_response': chatbot_response})
 
 # Streamlit app code
 @st.cache(allow_output_mutation=True)
@@ -94,7 +83,3 @@ if st.button("전송"):
         st.write(f"챗봇 응답: {chatbot_response}")
     else:
         st.text("오류가 발생했습니다. 서버에 요청을 보내지 못했습니다.")
-
-# Run Flask app
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
