@@ -1,12 +1,7 @@
 import streamlit as st
-import requests
-from gtts import gTTS
-from streamlit_chat import message
-from datetime import datetime
-import os
-import pygame
-import speech_recognition as sr
+from streamlit_webrtc import webrtc_streamer, WebRtcMode
 from pydub import AudioSegment
+import requests
 
 st.title("📝도배하자 with 챗봇")
 st.markdown(
@@ -14,86 +9,58 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 이전 대화 기록을 저장하는 세션 상태 변수
-if 'conversation_history' not in st.session_state:
-    st.session_state['conversation_history'] = []
+@st.cache(allow_output_mutation=True)
+def get_audio_buffer():
+    return AudioSegment.empty()
 
+audio_buffer = get_audio_buffer()
 
-def record_audio(filename):
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        st.text("음성 채팅 시작 버튼을 누른 후 말씀해 주세요")
-        try:
-            audio_data = r.listen(source, timeout=5)
-        except sr.WaitTimeoutError:
-            st.text("5초 동안 아무런 소리도 감지되지 않았습니다. 채팅을 종료하시겠습니까?")
-            return False
-        with open(filename, "wb") as f:
-            f.write(audio_data.get_wav_data(convert_rate=16000))
-    return True
+webrtc_ctx = webrtc_streamer(
+    key="audio-record",
+    mode=WebRtcMode.SENDRECV,
+    audio_receiver_size=1024,
+    rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+    media_stream_constraints={"audio": True, "video": False},
+)
 
+if webrtc_ctx.state.playing:
+    st.audio(
+        audio_buffer.export(format="wav", codec="pcm_s16le", bitrate="128k").read(),
+        format='audio/wav'
+    )
 
-def convert_wav_to_mp3(wav_filename, mp3_filename):
-    sound = AudioSegment.from_wav(wav_filename)
-    sound.export(mp3_filename, format="mp3")
+    st.text("Recording...")
 
-
-def process_audio_input(filename):
-    r = sr.Recognizer()
-    with sr.AudioFile(filename) as source:
-        audio_data = r.record(source)
-        user_input = r.recognize_google(audio_data, language="ko-KR")
-    return user_input
-
-
-if st.button("음성 채팅 시작 🔊"):
-    for file in os.listdir():
-        if file.endswith(".mp3") and file.startswith("recorded_audio"):
-            os.remove(file)
-
-    wav_filename = f"recorded_audio_{datetime.now().strftime('%Y%m%d%H%M%S')}.wav"
-    mp3_filename = f"recorded_audio_{datetime.now().strftime('%Y%m%d%H%M%S')}.mp3"
-
-    if record_audio(wav_filename):
-        convert_wav_to_mp3(wav_filename, mp3_filename)
-        user_input = process_audio_input(wav_filename)
-
-        st.session_state.conversation_history.append(('user', user_input))
-    # Flask 서버로 요청 전송
-        response = requests.post("http://localhost:5000/predict", json={"user_text": user_input})
-        if response.status_code == 200:
-            data = response.json()
-            chatbot_response = data['chatbot_response']
-            st.session_state.conversation_history.append(('chatbot', chatbot_response))
-
-            for i, (role, text) in enumerate(st.session_state.conversation_history):
-                if role == 'user':
-                    message(text, is_user=True, key=f"user_{i}")
-                else:
-                    message(text, key=f"chatbot_{i}")
-                    file_name = f"chatbot_response_{datetime.now().strftime('%Y%m%d%H%M%S')}.mp3"
-                    tts = gTTS(text=text, lang="ko")
-                    tts.save(file_name)
-
-                    if i == len(st.session_state.conversation_history) - 1:
-                        pygame.init()
-                        pygame.mixer.music.load(file_name)
-                        pygame.mixer.music.play()
-                        while pygame.mixer.music.get_busy():
-                            pygame.time.Clock().tick(10)
+    while True:
+        if webrtc_ctx.audio_receiver:
+            try:
+                audio_frames = webrtc_ctx.audio_receiver.get_frames(timeout=3)
+            except queue.Empty:
+                st.write("No audio received...")
+            sound_chunk = AudioSegment.empty()
+            try:
+                for audio_frame in audio_frames:
+                    sound = AudioSegment(
+                        data=audio_frame.to_ndarray().tobytes(),
+                        sample_width=audio_frame.format.bytes,
+                        frame_rate=audio_frame.sample_rate,
+                        channels=len(audio_frame.layout.channels),
+                    )
+                    sound_chunk += sound
+                if len(sound_chunk) > 0:
+                    audio_buffer += sound_chunk
+            except UnboundLocalError:
+                st.write("No audio detected...")
         else:
-            st.text("오류가 발생했습니다. 서버에 요청을 보내지 못했습니다.")
+            break
 
+if st.button("전송"):
+    audio_buffer.export("recorded_audio.wav", format="wav")
+    files = {"file": open("recorded_audio.wav", "rb")}
+    response = requests.post("http://localhost:5000/predict", files=files)
+    if response.status_code == 200:
+        data = response.json()
+        chatbot_response = data['chatbot_response']
+        st.write(f"챗봇 응답: {chatbot_response}")
     else:
-        button_clicked = st.button('채팅 종료')
-        if button_clicked :
-            st.session_state['conversation_history'].clear()  # 대화 기록을 클리어
-            st.write("채팅이 종료되었습니다. 이용해주셔서 감사합니다.")
-            st.write("채팅 창을 닫아주세요")
-
-        elif st.button("계속 대화하기"):
-             st.write("음성 채팅 시작 버튼을 누르고 대화를 이어가주세요.")
-
-
-
-
+        st.text("오류가 발생했습니다. 서버에 요청을 보내지 못했습니다.")
