@@ -5,7 +5,7 @@ import torch
 app = Flask(__name__)
 
 # 모델 및 토크나이저 초기화
-model_dir = r'C:\Users\user\PycharmProjects\pythonProject2\model_skt'
+model_dir = './service./model'
 tokenizer = AutoTokenizer.from_pretrained(model_dir, bos_token='</s>', eos_token='</s>', pad_token='<pad>')
 model = GPT2LMHeadModel.from_pretrained(model_dir)
 
