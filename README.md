@@ -1,4 +1,4 @@
-# ✒️ NLP project</br>AI copywriting service using product review sentiment analysis and keyword extraction
+# ✒️ NLP, LLM project</br>AI 대화형 Chatbot 모델 개발
 ## 👥 Team
 - Team name : DBDBDeep
 - Team members : 김유진, 이수현, 조서현
