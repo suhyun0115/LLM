@@ -1,7 +1,7 @@
 # ✒️ NLP project</br>AI copywriting service using product review sentiment analysis and keyword extraction
 ## 👥 Team
-- Team name : ⚔️
-- Team members : 
+- Team name : DBDBDeep
+- Team members : 김유진, 이수현, 조서현
 - * :clock1:시작일 : 2024.02.26(월)
   * ⏰목표일 : 2024.03.15(금)
 ## :books: skill
@@ -21,19 +21,29 @@
   **2. 자료출처**</br>
        &nbsp;&nbsp;&nbsp; Dacon https://dacon.io/competitions/official/236216/overview/description/
 
-## Ⅱ. 목표설정
-**1. 리뷰 감정분석**</br>
-       &nbsp;&nbsp;&nbsp; 1) KoBERT 모델을 Fine-tuning</br>
-       &nbsp;&nbsp;&nbsp; 2) 감정분석 후 긍정, 중립, 부정으로 분류</br>
-       &nbsp;&nbsp;&nbsp; 3) 긍정 리뷰 데이터만 사용</br>
+## Ⅱ. Data preprocessing & Modeling
+**1. 데이터 전처리**</br>
+       &nbsp;&nbsp;&nbsp; 1) DataFrame 변경 (id, category 삭제)</br>
+       &nbsp;&nbsp;&nbsp; 2) Dataset 증강 (기존 카테고리를 제외하고 다른 카테고리 질문을 추가)</br>
+       &nbsp;&nbsp;&nbsp; 3) Tokenizer</br>
        
-**2. 핵심 키워드 추출**</br>
-       &nbsp;&nbsp;&nbsp; 1) KeyBERT와 Kiwi 형태소분석기 사용해 핵심 키워드 추출 </br>
-       &nbsp;&nbsp;&nbsp; 2) 긍정 리뷰 데이터에서 핵심 키워드 3개 추출</br>
-       
-**3. 카피라이팅 서비스**</br>
-       &nbsp;&nbsp;&nbsp; 1) OpenAI API를 사용</br>
-       &nbsp;&nbsp;&nbsp; 2) 긍정 리뷰 데이터 csv파일을 업로드하면 핵심 키워드 3개를 추출해주는 서비스 구현</br>
-       &nbsp;&nbsp;&nbsp; 3) 추출한 핵심 키워드 3개와 광고할 제품의 이름, 설명을 조합해 카피라이팅을 해주는 서비스 구현</br>
+**2. 모델 학습**</br>
+       &nbsp;&nbsp;&nbsp; 1) skt, kykim, kakao : Fine-tuning</br>
+       &nbsp;&nbsp;&nbsp; 2) edentns, LDCC : QLoRA</br>
+       &nbsp;&nbsp;&nbsp; 3) RAG</br>
 
-## Ⅲ. 프로젝트 순서도
+       - 최종 모델 SKT 사용
+
+## Ⅲ. Chatbot 구현
+**1. 챗봇 서비스**</br>
+       &nbsp;&nbsp;&nbsp; 1) Streamlit 사용</br>
+       &nbsp;&nbsp;&nbsp; 2) speech_recognition 모듈 사용으로 대화형 챗봇 서비스 구현</br>
+       &nbsp;&nbsp;&nbsp; 3) </br>
+
+
+
+
+
+
+
+
