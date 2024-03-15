@@ -32,13 +32,13 @@
        &nbsp;&nbsp;&nbsp; 2) edentns, LDCC : QLoRA</br>
        &nbsp;&nbsp;&nbsp; 3) RAG</br>
 
-       - 최종 모델 SKT 사용
+  - 최종 모델 SKT 사용
 
 ## Ⅲ. Chatbot 구현
 **1. 챗봇 서비스**</br>
        &nbsp;&nbsp;&nbsp; 1) Streamlit 사용</br>
        &nbsp;&nbsp;&nbsp; 2) speech_recognition 모듈 사용으로 대화형 챗봇 서비스 구현</br>
-       &nbsp;&nbsp;&nbsp; 3) </br>
+       &nbsp;&nbsp;&nbsp; 3) 웹 배포</br>
 
 
 
