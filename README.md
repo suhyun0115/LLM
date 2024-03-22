@@ -17,6 +17,7 @@
   **1. 대화형 AI Chatbot 서비스 구현**</br>
        &nbsp;&nbsp;&nbsp; 1) 관련된 다양한 질문과 상황을 제공함으로써 정확하고 신속한 응답을 제공하는게 목표</br>
        &nbsp;&nbsp;&nbsp; 2) 고객의 문의에 신속, 정확하게 답변할 수 있는 시스템 구축</br>
+       
        ![스크린샷 2024-03-22 125456](https://github.com/suhyun0115/LLM/assets/151902283/6f50a8b7-132f-4ecc-834e-47bd3a89f2a7)
 
        
@@ -28,6 +29,8 @@
        &nbsp;&nbsp;&nbsp; 1) DataFrame 변경 (id, category 삭제)</br>
        &nbsp;&nbsp;&nbsp; 2) Dataset 증강 (기존 카테고리를 제외하고 다른 카테고리 질문을 추가)</br>
        &nbsp;&nbsp;&nbsp; 3) Tokenizer</br>
+
+       ![스크린샷 2024-03-22 130212](https://github.com/suhyun0115/LLM/assets/151902283/4301aaac-767b-430b-817f-e74416162bc9)
        
 **2. 모델 학습**</br>
        &nbsp;&nbsp;&nbsp; 1) skt, kykim, kakao : Fine-tuning</br>
@@ -35,6 +38,8 @@
        &nbsp;&nbsp;&nbsp; 3) RAG</br>
 
   - 최종 모델 SKT 사용
+    
+![스크린샷 2024-03-22 130434](https://github.com/suhyun0115/LLM/assets/151902283/f93d7d17-50c6-44dd-975e-354d67fcab45)
 
 ## Ⅲ. Chatbot 구현
 **1. 챗봇 서비스**</br>
@@ -42,6 +47,7 @@
        &nbsp;&nbsp;&nbsp; 2) speech_recognition 모듈 사용으로 대화형 챗봇 서비스 구현</br>
        &nbsp;&nbsp;&nbsp; 3) 웹 배포</br>
 
+![스크린샷 2024-03-22 130610](https://github.com/suhyun0115/LLM/assets/151902283/9e6cf06f-3bf0-48c0-a95c-9e468620126f)
 
 
 
