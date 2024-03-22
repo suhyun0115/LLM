@@ -18,7 +18,7 @@
        &nbsp;&nbsp;&nbsp; 1) 관련된 다양한 질문과 상황을 제공함으로써 정확하고 신속한 응답을 제공하는게 목표</br>
        &nbsp;&nbsp;&nbsp; 2) 고객의 문의에 신속, 정확하게 답변할 수 있는 시스템 구축</br>
        
-       ![스크린샷 2024-03-22 125456](https://github.com/suhyun0115/LLM/assets/151902283/6f50a8b7-132f-4ecc-834e-47bd3a89f2a7)
+![스크린샷 2024-03-22 125456](https://github.com/suhyun0115/LLM/assets/151902283/6f50a8b7-132f-4ecc-834e-47bd3a89f2a7)
 
        
   **2. 자료출처**</br>
