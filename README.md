@@ -39,6 +39,7 @@
 
 ![KakaoTalk_20240322_134709812](https://github.com/suhyun0115/LLM/assets/151902283/0b0384ab-a23c-4b5b-a5a8-8abf8cb152cd)
 
+![KakaoTalk_20240322_164708006](https://github.com/suhyun0115/LLM/assets/151902283/f3235c19-8c4f-4024-bef0-fb03a8e15a5c)
   - 최종 모델 SKT 사용
     
 ## Ⅲ. Chatbot 구현
