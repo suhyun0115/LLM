@@ -33,14 +33,14 @@
 ![스크린샷 2024-03-22 130212](https://github.com/suhyun0115/LLM/assets/151902283/4301aaac-767b-430b-817f-e74416162bc9)
        
 **2. 모델 학습**</br>
-       &nbsp;&nbsp;&nbsp; 1) skt, kykim, kakao : Fine-tuning</br>
-       &nbsp;&nbsp;&nbsp; 2) edentns, LDCC : QLoRA</br>
+       &nbsp;&nbsp;&nbsp; 1) skt, kykim, kakao : Fine-tuning</br>![c]
+       &nbsp;&nbsp;&nbsp; 2) edentns, LDCC : QLoRA</br>![c]
        &nbsp;&nbsp;&nbsp; 3) RAG</br>
+
+![KakaoTalk_20240322_134709812](https://github.com/suhyun0115/LLM/assets/151902283/0b0384ab-a23c-4b5b-a5a8-8abf8cb152cd)
 
   - 최종 모델 SKT 사용
     
-![스크린샷 2024-03-22 130434](https://github.com/suhyun0115/LLM/assets/151902283/f93d7d17-50c6-44dd-975e-354d67fcab45)
-
 ## Ⅲ. Chatbot 구현
 **1. 챗봇 서비스**</br>
        &nbsp;&nbsp;&nbsp; 1) Streamlit 사용</br>
