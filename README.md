@@ -30,7 +30,7 @@
        &nbsp;&nbsp;&nbsp; 2) Dataset 증강 (기존 카테고리를 제외하고 다른 카테고리 질문을 추가)</br>
        &nbsp;&nbsp;&nbsp; 3) Tokenizer</br>
 
-       ![스크린샷 2024-03-22 130212](https://github.com/suhyun0115/LLM/assets/151902283/4301aaac-767b-430b-817f-e74416162bc9)
+![스크린샷 2024-03-22 130212](https://github.com/suhyun0115/LLM/assets/151902283/4301aaac-767b-430b-817f-e74416162bc9)
        
 **2. 모델 학습**</br>
        &nbsp;&nbsp;&nbsp; 1) skt, kykim, kakao : Fine-tuning</br>
